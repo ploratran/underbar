@@ -100,14 +100,27 @@
   };
 
   // Produce a duplicate-free version of the array.
-  // should not mutate the input array
-  //should return all unique values contained in an unsorted array
   // should handle iterators that work with a sorted array
-  //should produce a brand new array instead of modifying the input array
   // should maintain same array length
-  _.uniq = function(array, isSorted, iterator) {
 
+  _.uniq = function(array, isSorted, iterator) {
+    //ex: array = [1, 2, 1, 3, 1, 4]
+    //    res   = [1, 2, 3, 4]
     let res = [];
+
+    for(let i = 0; i < array.length; ++i){
+      if(!res.includes(array[i])){
+        res.push(array[i]);
+      }
+    }
+
+    // //var array = [1, 2, 2, 3, 4, 4]; --> sorted
+    // //    res   = [1, 2]
+    // if(isSorted(array) == true){
+    //    for(let i = 0; i < array.length; ++i){
+    //
+    //    }
+    // }
 
     return res;
   };
