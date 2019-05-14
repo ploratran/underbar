@@ -32,7 +32,7 @@
   // Return an array of the first n elements of an array. If n is undefined,
   // return just the first element.
   _.first = function(array, n) {
-    return n === undefined ? array[0] : array.slice(0, n);
+    return n === undefined ? array[0] : array.slice(0,n);
   };
 
   // Like first, but for the last elements. If n is undefined, return just the
@@ -94,10 +94,22 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    return _.filter(collection, x =>{
+      return test(x) == false;
+    })
   };
 
   // Produce a duplicate-free version of the array.
+  // should not mutate the input array
+  //should return all unique values contained in an unsorted array
+  // should handle iterators that work with a sorted array
+  //should produce a brand new array instead of modifying the input array
+  // should maintain same array length
   _.uniq = function(array, isSorted, iterator) {
+
+    let res = [];
+
+    return res;
   };
 
 
@@ -106,6 +118,11 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    let res = [];
+    for(let i in collection){
+      res.push(iterator(collection[i]))
+    }
+    return res;
   };
 
   /*
@@ -147,7 +164,25 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+    var first = true;
+
+    _.each(collection, function(item, key, collection){
+
+      if(accumulator === undefined && first == true){
+        accumulator = item;
+        first = false;
+      }else{
+        accumulator = iterator(accumulator, item, key, collection);
+      }
+
+    });
+
+    return accumulator;
   };
+
+
+
+  // ------ PART II -------
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
